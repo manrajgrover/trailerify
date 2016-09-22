@@ -1,7 +1,7 @@
 {
   "name": "trailerify",
   "description": "Chrome extension to know IMDB ratings of a particular movie on Trailers Addict",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "short_name": "trailerify",
   "content_scripts": [
     {

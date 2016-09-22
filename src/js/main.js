@@ -16,6 +16,7 @@ const getMovieDetails = (movie, year) => {
     if (data.hasOwnProperty('Response') && data['Response'] === 'False') {
       console.log("Movie ratings not found");
     }
+    // Show IMDb ratings to user
     else {
       const span = document.createElement('span');
       span.setAttribute('id', 'imdbRating');
