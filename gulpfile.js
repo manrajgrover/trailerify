@@ -28,7 +28,7 @@ gulp.task('copyCSS', () => {
     .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('watch', function(){
+gulp.task('watch', () => {
   gulp.watch('src/js/*.js', ['scripts']);
   gulp.watch('src/css/*.css', ['copyCSS']);
   gulp.watch('src/img/*', ['copyImg']);

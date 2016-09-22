@@ -40,7 +40,10 @@ try {
    * Get year from heading
    */
   const yearRxp = /\(([^)]+)\)/;
-  const yearText = $.trim( $('#main_content .videos .video_bar > h1').contents().get(1).nodeValue );
+  const yearText = $.trim( $('#main_content .videos .video_bar > h1')
+                    .contents()
+                    .get(1)
+                    .nodeValue );
   const year = yearRxp.exec(yearText)[1];
 
   /**
