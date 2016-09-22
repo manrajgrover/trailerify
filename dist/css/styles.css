@@ -1,9 +1,0 @@
-#imdbRating {
-  color: #ffd700;
-  position: relative;
-  float: right;
-}
-
-#imdbRating::before {
-  content: "IMDb: ";
-}
