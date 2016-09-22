@@ -12,10 +12,11 @@ const getMovieDetails = (movie, year) => {
     dataType: 'json'
   })
   .done((data) => {
-    if (data.hasOwnProperty('Response') && data['Response'] === 'False'){
+    // Check for fail response
+    if (data.hasOwnProperty('Response') && data['Response'] === 'False') {
       console.log("Movie ratings not found");
     }
-    else{
+    else {
       const span = document.createElement('span');
       span.setAttribute('id', 'imdbRating');
       const ratings = document.createTextNode(data['imdbRating']);

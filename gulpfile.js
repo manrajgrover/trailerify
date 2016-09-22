@@ -15,7 +15,7 @@ gulp.task('scripts', () => {
 /**
  * Copies images from source to distribution
  */
-gulp.task('img', () => {
+gulp.task('copyImg', () => {
   gulp.src('src/img/*')
     .pipe(gulp.dest('./dist/img'));
 });
@@ -28,9 +28,15 @@ gulp.task('copyCSS', () => {
     .pipe(gulp.dest('./dist/css'));
 });
 
+gulp.task('watch', function(){
+  gulp.watch('src/js/*.js', ['scripts']);
+  gulp.watch('src/css/*.css', ['copyCSS']);
+  gulp.watch('src/img/*', ['copyImg']);
+})
+
 /**
  * Gulp default task for running other tasks
  */
-gulp.task('default', ['img', 'copyCSS', 'scripts'],  () => {
+gulp.task('default', ['copyImg', 'copyCSS', 'scripts'],  () => {
   console.log("Building project!");
 });
