@@ -13,6 +13,10 @@ $.fn.isThere = function() {
  * @return  None
  */
 const getMovieDetails = (movie, year) => {
+  if (movie === undefined || year === undefined) {
+    console.log("No information to search for");
+    return;
+  }
   $.ajax({
     url: 'http://www.omdbapi.com/?t='+movie+'&y='+year+'&plot=short&r=json',
     type: 'GET',
