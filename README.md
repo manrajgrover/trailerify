@@ -13,3 +13,6 @@ Chrome extension to add IMDB ratings of a particular movie on Trailers Addict
 1. Clone the repository and change directory to the cloned folder.
 2. Run `npm install` to install all dependencies.
 3. Run `gulp` command to build the project and `gulp watch` for building project automatically.
+
+## License
+[MIT](https://github.com/ManrajGrover/trailerify/blob/master/LICENSE.md) © Manraj Singh
