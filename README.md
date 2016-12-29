@@ -1,5 +1,7 @@
 # trailerify
-Chrome extension to add IMDB ratings of a particular movie on Trailers Addict
+> Chrome extension to add IMDB ratings of a particular movie on Trailers Addict
+
+
 ![Screen Shot Main](https://raw.githubusercontent.com/ManrajGrover/trailerify/master/screenshots/screen_shot_main.png)
 
 ## Installation
