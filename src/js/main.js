@@ -1,34 +1,32 @@
 const $ = require('jQuery');
 
-$.fn.isThere = function() {
+$.fn.isThere = () => {
   if (this.length === 0) {
-    throw Error("Empty result")
+    throw Error('Empty result');
   }
   return this;
-}
+};
 
 /**
  * @param  {string} movie Movie Name
- * @param  {string} year  Year in which movie was released 
+ * @param  {string} year  Year in which movie was released
  * @return  None
  */
 const getMovieDetails = (movie, year) => {
   if (movie === undefined || year === undefined) {
-    console.log("No information to search for");
+    console.log(`No information to search for`);
     return;
   }
   $.ajax({
-    url: 'http://www.omdbapi.com/?t='+movie+'&y='+year+'&plot=short&r=json',
+    url: `http://www.omdbapi.com/?t=${movie}&y=${year}&plot=short&r=json`,
     type: 'GET',
-    dataType: 'json'
+    dataType: 'json',
   })
   .done((data) => {
     // Check for fail response
-    if (data.hasOwnProperty('Response') && data['Response'] === 'False') {
+    if (data.hasOwnProperty('Response') && data.Response === 'False') {
       console.log("Movie ratings not found");
-    }
-    // Show IMDb ratings to user
-    else {
+    } else {
       /**
        * Rating found, try to append in main page
        */
@@ -43,14 +41,14 @@ const getMovieDetails = (movie, year) => {
          */
         const headingSpan = document.createElement('span');
         headingSpan.setAttribute('class', 'mthick');
-        const heading = document.createTextNode("IMDb Rating: ");
+        const heading = document.createTextNode('IMDb Rating: ');
         headingSpan.appendChild(heading);
 
         /**
          * Create rating span
          */
         const ratingSpan = document.createElement('span');
-        const ratings = document.createTextNode(data['imdbRating']);
+        const ratings = document.createTextNode(data.imdbRating);
         ratingSpan.appendChild(ratings);
 
         /**
@@ -62,37 +60,35 @@ const getMovieDetails = (movie, year) => {
         $('#main_content .movie_details .more_info > ul .f_col')
           .isThere()
           .append(listItem);
-      }
-      catch(err) {
-        /**
-         * Rating found, try to append in trailer page
-         */
+      } catch (error) {
         try {
+          /**
+           * Rating found, try to append in trailer page
+           */
 
           /**
            * Create header span
            */
           const headingSpan = document.createElement('span');
-          const heading = document.createTextNode("IMDb Rating");
+          const heading = document.createTextNode('IMDb Rating');
           headingSpan.appendChild(heading);
 
           /**
            * Creates rating text node
            */
-          const ratings = document.createTextNode(data['imdbRating']);
+          const ratings = document.createTextNode(data.imdbRating);
 
           /**
            * Appends nodes to the list
            */
           $('#interior .finfo_outer:nth-child(1) .finfo:nth-child(2)')
             .isThere()
-            .append("<br/><br/>")
+            .append('<br/><br/>')
             .append(headingSpan)
-            .append("<br/>")
+            .append('<br/>')
             .append(ratings);
-        }
-        catch(err) {
-          console.log("Error here");
+        } catch (err) {
+          console.log(`Error occured: ${err}`);
         }
       }
     }
@@ -112,17 +108,17 @@ const getDetailsFromMainPage = () => {
    * Get year from heading
    */
   const yearRxp = /\(([^)]+)\)/;
-  const yearText = $.trim( $('#main_content .videos .video_bar > h1')
+  const yearText = $.trim($('#main_content .videos .video_bar > h1')
                             .contents()
                             .get(1)
-                            .nodeValue );
+                            .nodeValue);
 
   const year = yearRxp.exec(yearText)[1];
   /**
    * Populate IMDb Ratings
    */
   getMovieDetails(movieName, year);
-}
+};
 
 const getMovieDetailsFromTrailerPage = () => {
   /**
@@ -133,25 +129,23 @@ const getMovieDetailsFromTrailerPage = () => {
    * Get year from heading
    */
   const yearRxp = /\(([^)]+)\)/;
-  const yearText = $.trim( $('#main_content .videos .video_bar > h1 > span')
+  const yearText = $.trim($('#main_content .videos .video_bar > h1 > span')
                             .contents()
                             .get(1)
-                            .nodeValue );
+                            .nodeValue);
   const year = yearRxp.exec(yearText)[1];
   /**
    * Populate IMDb Ratings
    */
   getMovieDetails(movieName, year);
-}
+};
 
 try {
   getDetailsFromMainPage();
-}
-catch(err) {
+} catch (error) {
   try {
     getMovieDetailsFromTrailerPage();
-  }
-  catch(err) {
-    console.log("No Movie Found");
+  } catch (err) {
+    console.log(`No Movie Found: ${err}`);
   }
 }

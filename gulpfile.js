@@ -7,9 +7,9 @@ const browserify = require('gulp-browserify');
 gulp.task('scripts', () => {
   gulp.src('src/js/main.js')
     .pipe(browserify({
-      debug : true
+      debug: true,
     }))
-    .pipe(gulp.dest('./dist/js'))
+    .pipe(gulp.dest('./dist/js'));
 });
 
 /**
@@ -32,11 +32,11 @@ gulp.task('watch', () => {
   gulp.watch('src/js/*.js', ['scripts']);
   gulp.watch('src/css/*.css', ['copyCSS']);
   gulp.watch('src/img/*', ['copyImg']);
-})
+});
 
 /**
  * Gulp default task for running other tasks
  */
-gulp.task('default', ['copyImg', 'copyCSS', 'scripts'],  () => {
-  console.log("Building project!");
+gulp.task('default', ['copyImg', 'copyCSS', 'scripts'], () => {
+  console.log('Building project!');
 });
