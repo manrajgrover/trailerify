@@ -20,23 +20,14 @@ gulp.task('copyImg', () => {
     .pipe(gulp.dest('./dist/img'));
 });
 
-/**
- * Copies CSS from source to distribution
- */
-gulp.task('copyCSS', () => {
-  gulp.src('src/css/*.css')
-    .pipe(gulp.dest('./dist/css'));
-});
-
 gulp.task('watch', () => {
   gulp.watch('src/js/*.js', ['scripts']);
-  gulp.watch('src/css/*.css', ['copyCSS']);
   gulp.watch('src/img/*', ['copyImg']);
 });
 
 /**
  * Gulp default task for running other tasks
  */
-gulp.task('default', ['copyImg', 'copyCSS', 'scripts'], () => {
+gulp.task('default', ['copyImg', 'scripts'], () => {
   console.log('Building project!');
 });
